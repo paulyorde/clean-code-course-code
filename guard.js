@@ -40,31 +40,40 @@ function processTransactions(transactions) {
     console.log('No transactions provided!');
     return;
   }
-
   for (const transaction of transactions) {
     if (transactions.status !== 'OPEN') {
       console.log('Invalid transaction type!');
       continue;
     }
-    if (transaction.type === 'PAYMENT') {
-      if (transaction.method === 'CREDIT_CARD') {
-        processCreditCardPayment(transaction);
-      } else if (transaction.method === 'PAYPAL') {
-        processPayPalPayment(transaction);
-      } else if (transaction.method === 'PLAN') {
-        processPlanPayment(transaction);
-      }
-    } else if (transaction.type === 'REFUND') {
-      if (transaction.method === 'CREDIT_CARD') {
-        processCreditCardRefund(transaction);
-      } else if (transaction.method === 'PAYPAL') {
-        processPayPalRefund(transaction);
-      } else if (transaction.method === 'PLAN') {
-        processPlanRefund(transaction);
-      }
-    } else {
+    if ( ! transaction.type === 'PAYMENT' || ! transaction.type === 'REFUND') {
       console.log('Invalid transaction type!', transaction);
+      continue;
     }
+    if (transaction.type === 'PAYMENT') {
+      makePayment( ) 
+    } else if (transaction.type === 'REFUND') {
+      refund( )
+    } 
+  }
+}
+
+function makePayment( ) {
+   if (transaction.method === 'CREDIT_CARD') {
+    processCreditCardPayment(transaction);
+  } else if (transaction.method === 'PAYPAL') {
+    processPayPalPayment(transaction);
+  } else if (transaction.method === 'PLAN') {
+    processPlanPayment(transaction);
+  }
+}
+
+function refund( ) {
+  if (transaction.method === 'CREDIT_CARD') {
+    processCreditCardRefund(transaction);
+  } else if (transaction.method === 'PAYPAL') {
+    processPayPalRefund(transaction);
+  } else if (transaction.method === 'PLAN') {
+    processPlanRefund(transaction);
   }
 }
 
